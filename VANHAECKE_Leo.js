@@ -40,6 +40,13 @@ function checkGuess() {
       return;
     }
     nbGuesses++;
+    if (nbGuesses >= maxGuesses) {
+      $retour = `Vous avez atteint la limite de tentatives. Le nombre secret était ${secretNumber}.`;
+      $guessBtn.disabled = true;
+      $startBtn.disabled = false;
+      game = false;
+      $numUsr.removeEventListener("keydown", checkGuess);
+    }
     restant = maxGuesses - nbGuesses;
     if (userGuess === secretNumber) {
       if (nbGuesses === 1){
@@ -58,13 +65,6 @@ function checkGuess() {
     } 
     else {
       $retour = `Trop haut. Essayez encore. Essai(s) restant(s) : ${restant}`;
-    }
-    if (nbGuesses >= maxGuesses) {
-      $retour = `Vous avez atteint la limite de tentatives. Le nombre secret était ${secretNumber}.`;
-      $guessBtn.disabled = true;
-      $startBtn.disabled = false;
-      game = false;
-      $numUsr.removeEventListener("keydown", checkGuess);
     }
     $output.innerHTML += `<br>Tentative ${nbGuesses}: ${userGuess} - ${$retour}`;
     $numUsr.value = "";
