@@ -46,6 +46,8 @@ function checkGuess() {
       $startBtn.disabled = false;
       game = false;
       $numUsr.removeEventListener("keydown", checkGuess);
+      $output.innerHTML += `<br>Tentative ${nbGuesses}: ${userGuess} - ${$retour}`;
+      return;
     }
     restant = maxGuesses - nbGuesses;
     if (userGuess === secretNumber) {
