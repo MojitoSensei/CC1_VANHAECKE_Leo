@@ -14,7 +14,9 @@ let game = false;
 function launchGame(_evt) {
   game = true;
   secretNumber = Math.floor(Math.random() * parseInt($maxUsr.value)) + 1;
+  console.log(secretNumber);
   maxGuesses = Math.ceil(Math.log($maxUsr.value))+1;
+  console.log(maxGuesses);
   nbGuesses = 0;
   $guessBtn.disabled = false;
   $output.textContent = `Devinez le nombre secret (entre 1 et ${$maxUsr.value}), en ${maxGuesses} essais.`;
