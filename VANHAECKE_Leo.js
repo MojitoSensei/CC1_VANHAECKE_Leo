@@ -40,6 +40,28 @@ function checkGuess() {
       return;
     }
     nbGuesses++;
+    restant = maxGuesses - nbGuesses;
+    if (userGuess === secretNumber) {
+      if (nbGuesses === 1){
+        $retour = `Bravo ! Vous avez trouvé le nombre secret : ${secretNumber} en ${nbGuesses} tentative.`;
+        $output.innerHTML += `<br>Tentative ${nbGuesses}: ${userGuess} - ${$retour}`;
+        $guessBtn.disabled = true;
+        $startBtn.disabled = false;
+        game = false;
+        $numUsr.removeEventListener("keydown", checkGuess);
+        return;
+      }
+      else {
+        $retour = `Bravo! Vous avez trouvé le nombre secret : ${secretNumber} en ${nbGuesses} tentatives.`;
+        $output.innerHTML += `<br>Tentative ${nbGuesses}: ${userGuess} - ${$retour}`;
+        $guessBtn.disabled = true;
+        $startBtn.disabled = false;
+        game = false;
+        $numUsr.removeEventListener("keydown", checkGuess);
+        return;
+      }
+      
+    } 
     if (nbGuesses >= maxGuesses) {
       $retour = `Vous avez atteint la limite de tentatives. Le nombre secret était ${secretNumber}.`;
       $guessBtn.disabled = true;
@@ -49,19 +71,6 @@ function checkGuess() {
       $output.innerHTML += `<br>Tentative ${nbGuesses}: ${userGuess} - ${$retour}`;
       return;
     }
-    restant = maxGuesses - nbGuesses;
-    if (userGuess === secretNumber) {
-      if (nbGuesses === 1){
-        $retour = `Bravo ! Vous avez trouvé le nombre secret : ${secretNumber} en ${nbGuesses} tentative.`;
-      }
-      else {
-        $retour = `Bravo! Vous avez trouvé le nombre secret : ${secretNumber} en ${nbGuesses} tentatives.`;
-      }
-      $guessBtn.disabled = true;
-      $startBtn.disabled = false;
-      game = false;
-      $numUsr.removeEventListener("keydown", checkGuess);
-    } 
     else if (userGuess < secretNumber) {
       $retour = `Trop bas. Essayez encore. Essai(s) restant(s) : ${restant}`;
     } 
